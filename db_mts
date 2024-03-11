@@ -5,25 +5,51 @@ CREATE DATABASE MTS;
 CREATE TABLE users (
 	user_id SERIAL PRIMARY KEY,
 	age VARCHAR(10),
-	sex BOOLEAN
+	sex VARCHAR(10)
 );
 
 -- Создание таблицы items
 CREATE TABLE items (
 	item_id SERIAL PRIMARY KEY,
-	title VARCHAR(255),
+	title VARCHAR(500),
 	genres TEXT,
 	autors TEXT,
-	year VARCHAR(10)
+	year VARCHAR(100)
 );
 
 -- Создание таблицы interactions
 CREATE TABLE interactions (
-	user_id INT,
-	item_id INT,
+	user_id SERIAL,
+	item_id SERIAL,
 	progress SMALLINT,
-	rating SMALLINT,
+	rating DECIMAL(3,2),
 	start_date DATE,
 	FOREIGN KEY (user_id) REFERENCES users(user_id),
 	FOREIGN KEY (item_id) REFERENCES items(item_id)
 );
+
+COPY users (age, sex)
+FROM 'D:\Datasets\mts\users.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY items (item_id, title, genres, autors, year)
+FROM 'D:\Datasets\mts\items.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY interactions (user_id, item_id, progress, rating, start_date)
+FROM 'D:\Datasets\mts\interactions.csv'
+DELIMITER ','
+CSV HEADER;
+
+
+
+-- Удаление таблицы interactions
+DROP TABLE IF EXISTS interactions;
+
+-- Удаление таблицы items
+DROP TABLE IF EXISTS items;
+
+-- Удаление таблицы users
+DROP TABLE IF EXISTS users;
