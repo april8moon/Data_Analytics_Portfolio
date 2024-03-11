@@ -1,0 +1,29 @@
+-- Создание базы данных MTS
+CREATE DATABASE MTS; 
+
+-- Создание таблицы users
+CREATE TABLE users (
+	user_id SERIAL PRIMARY KEY,
+	age VARCHAR(10),
+	sex BOOLEAN
+);
+
+-- Создание таблицы items
+CREATE TABLE items (
+	item_id SERIAL PRIMARY KEY,
+	title VARCHAR(255),
+	genres TEXT,
+	autors TEXT,
+	year VARCHAR(10)
+);
+
+-- Создание таблицы interactions
+CREATE TABLE interactions (
+	user_id INT,
+	item_id INT,
+	progress SMALLINT,
+	rating SMALLINT,
+	start_date DATE,
+	FOREIGN KEY (user_id) REFERENCES users(user_id),
+	FOREIGN KEY (item_id) REFERENCES items(item_id)
+);
