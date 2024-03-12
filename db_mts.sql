@@ -58,3 +58,27 @@ WHERE user_id NOT IN (SELECT user_id FROM users);
 ALTER TABLE interactions
 ADD CONSTRAINT interactions_user_id_fk FOREIGN KEY (user_id) REFERENCES users(user_id),
 ADD CONSTRAINT interactions_item_id_fk FOREIGN KEY (item_id) REFERENCES items(item_id);
+
+-- Посмотреть все записи items
+SELECT *
+FROM items;
+
+-- Посмотреть максимальную длину каждого столбца
+SELECT MAX(LENGTH(title)) AS max_title_length
+FROM items;
+
+SELECT MAX(LENGTH(authors)) AS max_title_authors
+FROM items;
+
+SELECT MAX(LENGTH(genres)) AS max_title_genres
+FROM items;
+
+-- Скорректировать тип данных для оптимизации хранилища
+ALTER TABLE items
+ALTER COLUMN title TYPE VARCHAR(450);
+
+ALTER TABLE items
+ALTER COLUMN authors TYPE VARCHAR(1250);
+
+ALTER TABLE items
+ALTER COLUMN genres TYPE VARCHAR(350);
