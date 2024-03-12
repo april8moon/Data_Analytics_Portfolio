@@ -64,13 +64,7 @@ SELECT *
 FROM items;
 
 -- Посмотреть максимальную длину каждого столбца
-SELECT MAX(LENGTH(title)) AS max_title_length
-FROM items;
-
-SELECT MAX(LENGTH(authors)) AS max_title_authors
-FROM items;
-
-SELECT MAX(LENGTH(genres)) AS max_title_genres
+SELECT MAX(LENGTH(title)) AS max_title_length, MAX(LENGTH(authors)) AS max_authors_length, MAX(LENGTH(genres)) AS max_genres_length
 FROM items;
 
 -- Скорректировать тип данных для оптимизации хранилища
