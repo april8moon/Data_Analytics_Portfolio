@@ -59,6 +59,7 @@ ALTER TABLE interactions
 ADD CONSTRAINT interactions_user_id_fk FOREIGN KEY (user_id) REFERENCES users(user_id),
 ADD CONSTRAINT interactions_item_id_fk FOREIGN KEY (item_id) REFERENCES items(item_id);
 
+
 -- Посмотреть все записи items
 SELECT *
 FROM items;
@@ -76,3 +77,16 @@ ALTER COLUMN authors TYPE VARCHAR(1250);
 
 ALTER TABLE items
 ALTER COLUMN genres TYPE VARCHAR(350);
+
+
+-- Посмотреть все записи users
+SELECT *
+FROM users;
+
+-- Посмотреть максимальную длину каждого столбца
+SELECT MAX(LENGTH(age)) AS max_age_length, MAX(LENGTH(sex)) AS max_sex_length
+FROM users;
+
+-- Скорректировать тип данных для оптимизации хранилища
+ALTER TABLE users
+ALTER COLUMN sex TYPE VARCHAR(3);
